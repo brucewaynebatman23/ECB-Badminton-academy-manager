@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Smash Academy — Management</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#10233a;--line:#ffffff16;--text:#f7f9fc;--muted:#91a1b7;--blue:#60a5fa;--green:#34d399;--yellow:#fbbf24;--red:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#2563eb20,transparent 30%),radial-gradient(circle at 100% 0,#8b5cf620,transparent 28%),var(--bg);color:var(--text);font:14px system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer}
+.side{position:fixed;inset:0 auto 0 0;width:245px;background:#06111eee;border-right:1px solid var(--line);padding:22px 14px;z-index:10}.brand{display:flex;gap:10px;align-items:center;padding:0 9px 26px}.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);font-size:22px}.brand b{font-size:15px}.brand small{display:block;color:var(--muted);font-size:10px}.nav{display:grid;gap:5px}.nav button{border:0;background:none;color:#9ba9bc;text-align:left;padding:12px;border-radius:10px}.nav button:hover,.nav button.on{background:#60a5fa18;color:#fff}.main{margin-left:245px;padding:25px;max-width:1650px}.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:20px}.top h1{font-size:27px;margin:0}.top p{color:var(--muted);font-size:12px;margin:4px 0}.actions{display:flex;gap:8px}.btn{background:var(--panel);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px 14px}.primary{border:0;background:linear-gradient(135deg,#3b82f6,#6366f1)}.green{color:#a7f3d0}.mobile{display:none}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:linear-gradient(145deg,#102039e8,#091729f2);border:1px solid var(--line);border-radius:17px;box-shadow:0 20px 65px #00000025}.stat{padding:18px}.label{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.8px}.value{font-size:27px;font-weight:800;margin-top:7px}.sub{color:var(--muted);font-size:10px;margin-top:4px}
+.grid{display:grid;grid-template-columns:1fr 1.5fr;gap:14px;margin:14px 0}.panel{padding:18px}.head{display:flex;justify-content:space-between;gap:10px;align-items:start}.head h3{font-size:14px;margin:0}.head span{color:var(--muted);font-size:10px}.chart{height:250px}.chart canvas{width:100%;height:100%}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.quick button{background:#0d1b2dcc;border:1px solid var(--line);color:#fff;border-radius:13px;padding:15px;text-align:left}.quick b{display:block}.quick small{display:block;color:var(--muted);margin-top:4px}
+.students{padding:18px}.toolbar{display:flex;gap:8px;margin:14px 0}.input,.select{background:#071525;color:#fff;border:1px solid var(--line);border-radius:9px;padding:10px;outline:none;width:100%}.select{max-width:190px}.wrap{overflow:auto}table{width:100%;min-width:900px;border-collapse:collapse}th{font-size:10px;color:var(--muted);text-align:left;text-transform:uppercase;letter-spacing:.6px;padding:10px;border-bottom:1px solid var(--line)}td{padding:12px 10px;border-bottom:1px solid #ffffff0b;font-size:12px}.person{display:flex;gap:9px;align-items:center}.avatar{width:33px;height:33px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#7c3aed);font-size:10px;font-weight:800}.muted{color:var(--muted)}.pill{display:inline-flex;gap:5px;align-items:center;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:700}.pill:before{content:"";width:5px;height:5px;border-radius:50%}.paid{color:#86efac;background:#34d39918}.paid:before{background:var(--green)}.partial{color:#fde68a;background:#fbbf2418}.partial:before{background:var(--yellow)}.unpaid{color:#fecdd3;background:#fb718518}.unpaid:before{background:var(--red)}.rowActions{display:flex;gap:5px}.icon{background:none;color:#aebbd0;border:1px solid var(--line);border-radius:8px;padding:6px 8px}.wa{color:#86efac}
+.overlay{display:none;position:fixed;inset:0;background:#000b;backdrop-filter:blur(8px);z-index:100;align-items:center;justify-content:center;padding:16px}.overlay.show{display:flex}.modal{width:min(540px,100%);max-height:92vh;overflow:auto;background:#0b1b2e;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 30px 100px #0008}.modal h2{margin:0 0 16px}.form{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:var(--muted)}.modalBtns{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.help{color:var(--muted);font-size:11px;line-height:1.5}.queue{margin-top:13px;border:1px solid var(--line);border-radius:10px;overflow:auto;max-height:300px}.q{display:flex;justify-content:space-between;padding:11px;border-bottom:1px solid var(--line);font-size:12px}.q:last-child{border:0}.q.current{background:#60a5fa12}.q small{display:block;color:var(--muted);margin-top:3px}.toast{position:fixed;right:16px;bottom:16px;background:#10243c;border:1px solid var(--line);padding:12px 15px;border-radius:10px;opacity:0;transform:translateY(60px);transition:.25s;z-index:200;font-size:12px}.toast.show{opacity:1;transform:none}
+@media(max-width:1050px){.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+@media(max-width:760px){.side{transform:translateX(-105%);transition:.2s}.side.open{transform:none}.main{margin-left:0;padding:17px}.mobile{display:inline-flex}.actions>.btn:not(.mobile){display:none}.top h1{font-size:22px}.quick{grid-template-columns:1fr}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.select{max-width:none}}
+@media(max-width:440px){.cards{grid-template-columns:1fr}.value{font-size:24px}}
+</style>
+</head>
+<body>
+<aside class="side" id="side">
+<div class="brand"><div class="logo">🏸</div><div><b>Smash Academy</b><small>Fee & Student Manager</small></div></div>
+<nav class="nav">
+<button class="on" onclick="go('dashboard',this)">📊 Dashboard</button>
+<button onclick="go('students',this)">👥 Students</button>
+<button onclick="studentModal()">➕ Add Student</button>
+<button onclick="paymentModal()">💰 Record Payment</button>
+<button onclick="bulkModal()">💬 WhatsApp Reminders</button>
+<button onclick="exportCSV()">📥 Export CSV</button>
+<button onclick="backup()">💾 Backup Data</button>
+<button onclick="restore()">📤 Restore Backup</button>
+</nav></aside>
+
+<main class="main">
+<header class="top"><div><h1>Academy Dashboard</h1><p id="month"></p></div><div class="actions"><button class="btn mobile" onclick="side()">☰</button><button class="btn" onclick="closeMonth()">🔄 Close Month</button><button class="btn primary" onclick="studentModal()">+ Add Student</button></div></header>
+
+<section id="dashboard">
+<div class="cards">
+<div class="card stat"><div class="label">Expected Revenue</div><div class="value" id="expected">₹0</div><div class="sub">All monthly fees</div></div>
+<div class="card stat"><div class="label">Collected</div><div class="value" id="collected">₹0</div><div class="sub">This month</div></div>
+<div class="card stat"><div class="label">Students</div><div class="value" id="count">0</div><div class="sub" id="mini"></div></div>
+<div class="card stat"><div class="label">Outstanding</div><div class="value" id="due">₹0</div><div class="sub">Previous + current</div></div>
+</div>
+<div class="grid">
+<div class="card panel"><div class="head"><h3>Current Month Status</h3><span id="summary"></span></div><div class="chart"><canvas id="donut"></canvas></div></div>
+<div class="card panel"><div class="head"><h3>Revenue — Last 12 Months</h3><span>Recorded payments</span></div><div class="chart"><canvas id="bars"></canvas></div></div>
+</div>
+<div class="quick">
+<button onclick="studentModal()"><b>➕ Add Student</b><small>Create a student profile</small></button>
+<button onclick="paymentModal()"><b>💰 Record Payment</b><small>Add a fee payment instantly</small></button>
+<button onclick="bulkModal()"><b>💬 Send Reminders</b><small>Open WhatsApp one student at a time</small></button>
+</div>
+</section>
+
+<section id="students" class="card students">
+<div class="head"><div><h3>Students</h3><span>Fees, dues and WhatsApp in one place</span></div><button class="btn primary" onclick="studentModal()">+ Add Student</button></div>
+<div class="toolbar"><input class="input" id="search" placeholder="Search student, parent or phone…" oninput="render()"><select class="select" id="batch" onchange="render()"><option value="">All batches</option></select></div>
+<div class="wrap"><table><thead><tr><th>Student</th><th>Parent</th><th>WhatsApp</th><th>Batch</th><th>Status</th><th>Fee</th><th>Outstanding</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div>
+</section>
+</main>
+
+<div class="overlay" id="studentBox"><div class="modal"><h2 id="studentHeading">Add Student</h2><form onsubmit="saveStudent(event)"><input type="hidden" id="sid"><div class="form">
+<div class="field"><label>Student name</label><input class="input" id="name" required></div>
+<div class="field"><label>Parent name</label><input class="input" id="parent" required></div>
+<div class="field"><label>WhatsApp number</label><input class="input" id="phone" placeholder="9876543210 (10 digits)" required></div>
+<div class="field"><label>Batch</label><input class="input" id="batchName" placeholder="Morning Batch" required></div>
+<div class="field"><label>Monthly fee</label><input class="input" id="fee" type="number" min="0" required></div>
+<div class="field"><label>Previous dues</label><input class="input" id="dues" type="number" min="0" value="0"></div>
+</div><div class="modalBtns"><button type="button" class="btn" onclick="closeBox('studentBox')">Cancel</button><button class="btn primary">Save Student</button></div></form></div></div>
+
+<div class="overlay" id="payBox"><div class="modal"><h2>Record Payment</h2><form onsubmit="savePay(event)"><div class="form"><div class="field full"><label>Student</label><select class="select" style="max-width:none" id="payStudent" required></select></div><div class="field full"><label>Amount paid</label><input class="input" id="amount" type="number" min="1" required></div></div><div class="modalBtns"><button type="button" class="btn" onclick="closeBox('payBox')">Cancel</button><button class="btn green">Save Payment</button></div></form></div></div>
+
+<div class="overlay" id="bulkBox"><div class="modal"><h2>WhatsApp Reminders</h2><div class="help">Students with an outstanding balance are queued. Tap Open WhatsApp, send the pre-filled message, return here, then open the next one.</div><div class="queue" id="queue"></div><div class="modalBtns"><button class="btn" onclick="closeBox('bulkBox')">Close</button><button class="btn primary" id="next" onclick="nextWA()">Open WhatsApp</button></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY="smash_academy_manager_v4";let db=load(),q=[],qi=0;
+const $=id=>document.getElementById(id),money=n=>"₹"+Number(n||0).toLocaleString("en-IN");
+function ID(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function MK(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")}
+function esc(s){return String(s??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[x]))}
+function monthName(){return new Date().toLocaleDateString("en-IN",{month:"long",year:"numeric"})}
+function bal(s){return Math.max(0,Number(s.fee)-Number(s.paid||0))}
+function total(s){return Number(s.dues||0)+bal(s)}
+function st(s){return s.paid>=s.fee&&s.fee>0?"PAID":s.paid>0?"PARTIAL":"UNPAID"}
+function seed(){return{month:MK(),students:[
+{id:ID(),name:"Aarav Sharma",parent:"Rajesh Sharma",phone:"9876543210",batch:"Morning Batch",fee:3000,dues:0,paid:3000},
+{id:ID(),name:"Diya Patel",parent:"Neha Patel",phone:"8765432109",batch:"Evening Batch",fee:3000,dues:1000,paid:1500},
+{id:ID(),name:"Rohan Mehta",parent:"Sanjay Mehta",phone:"9654321098",batch:"Morning Batch",fee:3000,dues:3000,paid:0},
+{id:ID(),name:"Ananya Singh",parent:"Pooja Singh",phone:"9543210987",batch:"Weekend Batch",fee:3500,dues:0,paid:3500}],payments:[]}}
+function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.students)){if(x.month!==MK())x=carry(x);return x}}catch(e){}let x=seed();localStorage.setItem(KEY,JSON.stringify(x));return x}
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify(db));return true}
+  catch(e){console.warn("Storage unavailable",e);return false}
+}
+function carry(x){x.students.forEach(s=>{s.dues=Number(s.dues||0)+bal(s);s.paid=0});x.month=MK();return x}
+function closeMonth(){if(!confirm("Close this month now?\n\nUnpaid current-month balances will be added to Previous Dues and current-month paid amounts reset to ₹0.\n\nDo this only once for the month."))return;db=carry(db);save();refresh();toast("Month closed successfully.")}
+function side(force){$("side").classList.toggle("open",force===undefined?!$("side").classList.contains("open"):force)}
+function go(id,b){$(id).scrollIntoView({behavior:"smooth"});document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("on"));b?.classList.add("on");side(false)}
+function toast(t){$("toast").textContent=t;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2300)}
+function refresh(){
+ $("month").textContent=monthName()+" • Academy overview";
+ $("expected").textContent=money(db.students.reduce((a,s)=>a+s.fee,0));
+ $("collected").textContent=money(db.students.reduce((a,s)=>a+s.paid,0));
+ $("count").textContent=db.students.length;
+ $("due").textContent=money(db.students.reduce((a,s)=>a+total(s),0));
+ let p=db.students.filter(s=>st(s)==="PAID").length,pa=db.students.filter(s=>st(s)==="PARTIAL").length,u=db.students.filter(s=>st(s)==="UNPAID").length;
+ $("mini").textContent=`${p} paid • ${pa} partial • ${u} unpaid`;$("summary").textContent=`${p} paid • ${pa} partial • ${u} unpaid`;
+ let old=$("batch").value,bs=[...new Set(db.students.map(s=>s.batch))].sort();$("batch").innerHTML='<option value="">All batches</option>'+bs.map(x=>`<option>${esc(x)}</option>`).join("");$("batch").value=old;render();draw()
+}
+function render(){
+ let text=$("search").value.toLowerCase().trim(),batch=$("batch").value;
+ let a=db.students.filter(s=>(!text||[s.name,s.parent,s.phone].some(v=>String(v).toLowerCase().includes(text)))&&(!batch||s.batch===batch));
+ $("rows").innerHTML=a.length?a.map(s=>{let x=st(s),cl=x==="PAID"?"paid":x==="PARTIAL"?"partial":"unpaid";return`<tr>
+<td><div class="person"><div class="avatar">${esc(s.name.split(/\s+/).map(x=>x[0]).join("").slice(0,2))}</div><div><b>${esc(s.name)}</b></div></div></td>
+<td>${esc(s.parent)}</td><td class="muted">${esc(s.phone)}</td><td>${esc(s.batch)}</td><td><span class="pill ${cl}">${x}</span></td><td>${money(s.fee)}</td>
+<td><b>${money(total(s))}</b>${s.dues?`<small class="muted" style="display:block">Previous: ${money(s.dues)}</small>`:""}</td>
+<td><div class="rowActions"><button class="icon wa" onclick="wa('${s.id}')">💬</button><button class="icon" onclick="paymentModal('${s.id}')">₹</button><button class="icon" onclick="studentModal('${s.id}')">✏️</button><button class="icon" onclick="removeStudent('${s.id}')">🗑️</button></div></td></tr>`}).join(""):'<tr><td colspan="8" style="text-align:center;padding:35px;color:#91a1b7">No students found.</td></tr>'
+}
+function studentModal(id=""){
+ let s=db.students.find(x=>x.id===id);$("studentHeading").textContent=s?"Edit Student":"Add Student";$("sid").value=s?.id||"";$("name").value=s?.name||"";$("parent").value=s?.parent||"";$("phone").value=s?.phone||"";$("batchName").value=s?.batch||"";$("fee").value=s?.fee??"";$("dues").value=s?.dues??0;$("studentBox").classList.add("show")
+}
+function saveStudent(e){
+  if(e)e.preventDefault();
+  try{
+    if(!Array.isArray(db.students)) db.students=[];
+    let id=$("sid").value.trim();
+    let d={
+      name:$("name").value.trim(),
+      parent:$("parent").value.trim(),
+      phone:$("phone").value.trim(),
+      batch:$("batchName").value.trim(),
+      fee:Number($("fee").value||0),
+      dues:Number($("dues").value||0)
+    };
+    if(!d.name||!d.parent||!d.phone||!d.batch||!Number.isFinite(d.fee)){
+      alert("Please fill Student Name, Parent Name, WhatsApp Number, Batch and Monthly Fee.");
+      return false;
+    }
+    if(id){
+      let s=db.students.find(x=>x.id===id);
+      if(!s) throw new Error("Student not found");
+      Object.assign(s,d);
+      if(!Number.isFinite(Number(s.paid))) s.paid=0;
+    }else{
+      db.students.push({id:ID(),...d,paid:0});
+    }
+    save();
+    closeBox("studentBox");
+    refresh();
+    toast(id?"Student updated successfully.":"Student added successfully.");
+    return false;
+  }catch(err){
+    console.error(err);
+    alert("Could not save the student. Please try again.");
+    return false;
+  }
+}
+function removeStudent(id){let s=db.students.find(x=>x.id===id);if(!s||!confirm("Delete "+s.name+"? This cannot be undone."))return;db.students=db.students.filter(x=>x.id!==id);db.payments=db.payments.filter(p=>p.studentId!==id);save();refresh();toast("Student deleted.")}
+function paymentModal(id=""){let x=$("payStudent");x.innerHTML='<option value="">Select student</option>'+[...db.students].sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${s.id}">${esc(s.name)} — ${money(total(s))} due</option>`).join("");x.value=id;$("amount").value="";$("payBox").classList.add("show")}
+function savePay(e){e.preventDefault();let sid=$("payStudent").value,a=Number($("amount").value),s=db.students.find(x=>x.id===sid);if(!s||a<=0)return alert("Select a student and enter a valid amount.");s.paid+=a;db.payments.push({id:ID(),studentId:sid,amount:a,date:new Date().toISOString(),month:MK()});save();closeBox("payBox");refresh();toast(money(a)+" payment recorded.")}
+function num(raw){let n=String(raw||"").replace(/\D/g,"");if(n.length===10)n="91"+n;else if(n.length===11&&n[0]==="0")n="91"+n.slice(1);return n}
+function msg(s){let cur=bal(s),prev=Number(s.dues||0);return`Hello ${s.parent} 👋
+
+This is a friendly fee reminder from Smash Academy regarding ${s.name}'s badminton training fee.
+
+📅 Month: ${monthName()}
+👤 Student: ${s.name}
+💰 Monthly Fee: ${money(s.fee)}
+💳 Paid This Month: ${money(s.paid)}${prev?`\n📌 Previous Dues: ${money(prev)}`:""}${cur?`\n⚠️ Current Month Balance: ${money(cur)}`:""}
+
+💵 Total Outstanding: ${money(prev+cur)}
+
+Please make the payment at your convenience.
+
+Thank you 🙏
+Smash Academy`}
+function wa(id){
+  try{
+    let s=db.students.find(x=>x.id===id);
+    if(!s)return alert("Student not found.");
+    let n=num(s.phone);
+    if(!n||n.length<11)return alert("Enter a valid 10-digit Indian WhatsApp number, e.g. 9876543210.");
+    let url="https://wa.me/"+n+"?text="+encodeURIComponent(msg(s));
+    // Use the current browser tab for maximum reliability on Android/GitHub Pages.
+    // WhatsApp will open the chat with the message pre-filled; you still press Send yourself.
+    window.location.href=url;
+  }catch(err){
+    console.error(err);
+    alert("WhatsApp could not be opened. Check the student's phone number and try again.");
+  }
+}
+function bulkModal(){q=db.students.filter(s=>total(s)>0);qi=0;if(!q.length)return alert("No students currently have an outstanding balance.");drawQueue();$("bulkBox").classList.add("show")}
+function drawQueue(){$("queue").innerHTML=q.map((s,i)=>`<div class="q ${i===qi?"current":""}"><div><b>${esc(s.name)}</b><small>${money(total(s))} outstanding</small></div><div>${i<qi?"✓ Sent":i===qi?"Next":"Waiting"}</div></div>`).join("");$("next").disabled=qi>=q.length;$("next").textContent=qi>=q.length?"Finished":"Open WhatsApp"}
+function nextWA(){if(qi>=q.length)return;wa(q[qi].id);qi++;drawQueue()}
+function closeBox(id){$(id).classList.remove("show")}
+document.querySelectorAll(".overlay").forEach(x=>x.addEventListener("click",e=>{if(e.target===x)x.classList.remove("show")}))
+function exportCSV(){let rows=[["Student","Parent","WhatsApp","Batch","Monthly Fee","Paid This Month","Current Balance","Previous Dues","Total Outstanding","Status"],...db.students.map(s=>[s.name,s.parent,s.phone,s.batch,s.fee,s.paid,bal(s),s.dues,total(s),st(s)])];let csv=rows.map(r=>r.map(v=>{v=String(v??"");return/[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v}).join(",")).join("\n"),url=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv"})),a=document.createElement("a");a.href=url;a.download="smash-academy-"+MK()+".csv";a.click();URL.revokeObjectURL(url);toast("CSV exported.")}
+function backup(){let url=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:"application/json"})),a=document.createElement("a");a.href=url;a.download="smash-academy-backup-"+MK()+".json";a.click();URL.revokeObjectURL(url);toast("Backup downloaded.")}
+function restore(){let i=document.createElement("input");i.type="file";i.accept=".json";i.onchange=()=>{let f=i.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x||!Array.isArray(x.students)||!Array.isArray(x.payments))throw 0;db=x;if(db.month!==MK())db=carry(db);save();refresh();toast("Backup restored.")}catch(e){alert("Invalid Smash Academy backup file.")}};r.readAsText(f)};i.click()}
+function canvas(c){let r=devicePixelRatio||1,w=c.clientWidth,h=c.clientHeight;c.width=w*r;c.height=h*r;let x=c.getContext("2d");x.setTransform(r,0,0,r,0,0);x.clearRect(0,0,w,h);return[x,w,h]}
+function draw(){donut();bars()}
+function donut(){let[c,w,h]=canvas($("donut")),a=["PAID","PARTIAL","UNPAID"].map(x=>db.students.filter(s=>st(s)===x).length),t=a.reduce((x,y)=>x+y,0),cx=w/2,cy=h/2,r=Math.min(w,h)*.31,inner=r*.6;if(!t)return;let start=-Math.PI/2;["#34d399","#fbbf24","#fb7185"].forEach((col,i)=>{if(!a[i])return;let z=a[i]/t*Math.PI*2;c.beginPath();c.arc(cx,cy,r,start,start+z);c.strokeStyle=col;c.lineWidth=r-inner;c.lineCap="round";c.stroke();start+=z});c.textAlign="center";c.textBaseline="middle";c.fillStyle="#fff";c.font="800 25px system-ui";c.fillText(t,cx,cy-5);c.fillStyle="#91a1b7";c.font="11px system-ui";c.fillText("Students",cx,cy+17)}
+function bars(){let[c,w,h]=canvas($("bars")),now=new Date(),a=[];for(let i=11;i>=0;i--){let d=new Date(now.getFullYear(),now.getMonth()-i,1),k=MK(d),v=db.payments.filter(p=>p.month===k).reduce((x,p)=>x+Number(p.amount||0),0);if(k===MK()&&!db.payments.some(p=>p.month===k))v=db.students.reduce((x,s)=>x+s.paid,0);a.push({l:d.toLocaleDateString("en-IN",{month:"short"}),v})}let max=Math.max(1,...a.map(x=>x.v)),L=32,R=7,T=12,B=30,cw=w-L-R,ch=h-T-B;for(let i=0;i<4;i++){let y=T+ch*i/3;c.beginPath();c.moveTo(L,y);c.lineTo(w-R,y);c.strokeStyle="#ffffff0b";c.stroke()}a.forEach((x,i)=>{let slot=cw/a.length,bw=slot*.56,bh=x.v/max*ch,xx=L+i*slot+(slot-bw)/2,yy=T+ch-bh;c.fillStyle="#60a5fa";c.beginPath();c.roundRect(xx,yy,bw,Math.max(3,bh),5);c.fill();c.fillStyle="#7f8da3";c.font="10px system-ui";c.textAlign="center";c.fillText(x.l,xx+bw/2,h-9)})}
+if(db.month!==MK()){db=carry(db);save()}refresh();window.addEventListener("resize",draw);
+</script>
+</body>
+</html>
